@@ -5,8 +5,11 @@ import "errors"
 // Dictionary - 별칭이 Dictionary인 map
 type Dictionary map[string]string
 
-var errNotFound = errors.New("Not Found")
-var errWordExists = errors.New("That word already exists")
+var (
+	errNotFound   = errors.New("Not Found")
+	errWordExists = errors.New("That word already exists")
+	errCantUpdate = errors.New("Cant update non-existing word")
+)
 
 // Search - map에서 키에 해당하는 값을 return
 func (d Dictionary) Search(word string) (string, error) {
@@ -27,6 +30,18 @@ func (d Dictionary) Add(word, def string) error {
 		d[word] = def
 	case nil:
 		return errWordExists
+	}
+	return nil
+}
+
+// Update - mpa에 값이 존재하면 수정
+func (d Dictionary) Update(word, def string) error {
+	_, err := d.Search(word)
+	switch err {
+	case nil:
+		d[word] = def
+	case errNotFound:
+		return errCantUpdate
 	}
 	return nil
 }

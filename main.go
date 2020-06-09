@@ -29,4 +29,13 @@ func main() {
 		fmt.Println(definition)
 	}
 
+	baseWord := "name"
+	dictionary.Add(baseWord, "Nick")
+	err = dictionary.Update(baseWord, "Judy")
+	if err != nil {
+		fmt.Println(err)
+	}
+	word, _ := dictionary.Search(baseWord)
+	fmt.Println(word)
+
 }
