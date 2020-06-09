@@ -45,3 +45,9 @@ func (d Dictionary) Update(word, def string) error {
 	}
 	return nil
 }
+
+// Delete - map에서 키에 해당하는 값을 삭제
+func (d Dictionary) Delete(word string) {
+	// 기본적으로 delete() 함수는 아무것도 return 하지 않음
+	delete(d, word)
+}

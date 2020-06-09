@@ -11,7 +11,7 @@ func main() {
 	dictionary := mydict.Dictionary{"first": "First word"}
 	// 이렇게 따로 넣어줄 수도 있음
 	dictionary["second"] = "Second word"
-	definition, err := dictionary.Search("third")
+	definition, err := dictionary.Search("second")
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -37,5 +37,13 @@ func main() {
 	}
 	word, _ := dictionary.Search(baseWord)
 	fmt.Println(word)
+
+	dictionary.Delete("second")
+	definition, err = dictionary.Search("second")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(definition)
+	}
 
 }
